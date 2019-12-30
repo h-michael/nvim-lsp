@@ -1953,9 +1953,9 @@ This server accepts configuration via the `settings` key.
   
   Check all targets and tests (will be passed as `--all-targets`)
 
-- **`rust-analyzer.cargo-watch.arguments`**: `string`
+- **`rust-analyzer.cargo-watch.arguments`**: `array`
 
-  Default: `""`
+  Default: `{}`
   
   `cargo-watch` arguments. (e.g: `--features="shumway,pdf"` will run as `cargo watch -x "check --features="shumway,pdf""` )
 
@@ -1965,11 +1965,11 @@ This server accepts configuration via the `settings` key.
   
   `cargo-watch` command. (e.g: `clippy` will run as `cargo watch -x clippy` )
 
-- **`rust-analyzer.cargo-watch.ignore`**: `array`
+- **`rust-analyzer.cargo-watch.enable`**: `boolean`
 
-  Default: `{}`
+  Default: `true`
   
-  A list of patterns for cargo-watch to ignore (will be passed as `--ignore`)
+  Run `cargo check` for diagnostics on save
 
 - **`rust-analyzer.cargoFeatures.allFeatures`**: `boolean`
 
@@ -1992,12 +1992,6 @@ This server accepts configuration via the `settings` key.
   Default: `true`
   
   Display additional type information in the editor
-
-- **`rust-analyzer.enableCargoWatchOnStartup`**: `enum { "ask", "enabled", "disabled" }`
-
-  Default: `"ask"`
-  
-  Whether to run `cargo watch` on startup
 
 - **`rust-analyzer.enableEnhancedTyping`**: `boolean`
 
@@ -2043,11 +2037,9 @@ This server accepts configuration via the `settings` key.
 
   When highlighting Rust code, use a unique color per identifier
 
-- **`rust-analyzer.trace.cargo-watch`**: `enum { "off", "error", "verbose" }`
+- **`rust-analyzer.scopeMappings`**: `object`
 
-  Default: `"off"`
-  
-  Trace output of cargo-watch
+  Mapping Rust Analyzer scopes to TextMateRule scopes list.
 
 - **`rust-analyzer.trace.server`**: `enum { "off", "messages", "verbose" }`
 
@@ -2450,7 +2442,7 @@ require'nvim_lsp'.vimls.setup{}
 
 https://github.com/redhat-developer/yaml-language-server
 
-`yaml-language-server` can be installed via `:LspInstall tsserver` or by yourself with `npm`:
+`yaml-language-server` can be installed via `:LspInstall yamlls` or by yourself with `npm`:
 ```sh
 npm install -g yaml-language-server
 ```
